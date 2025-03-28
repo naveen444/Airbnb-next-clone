@@ -1,26 +1,194 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* @custom-variant dark (&:is(.dark *)); */
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --radius: 0.625rem;
+	--background: oklch(1 0 0); /* white */
+	--foreground: oklch(0.14 0.01 266); /* dark gray */
+	--card: oklch(1 0 0); /* white */
+	--card-foreground: oklch(0.14 0.01 266); /* dark gray */
+	--popover: oklch(1 0 0); /* white */
+	--popover-foreground: oklch(0.14 0.01 266); /* dark gray */
+	--primary: oklch(0.56 0.21 11); /* red */
+	--primary-foreground: oklch(0.97 0.01 7); /* very light pink */
+	--secondary: oklch(0.96 0.01 266); /* light gray */
+	--secondary-foreground: oklch(0.19 0.01 266); /* dark gray */
+	--muted: oklch(0.96 0.01 266); /* light gray */
+	--muted-foreground: oklch(0.57 0.005 266); /* medium gray */
+	--accent: oklch(0.96 0.01 266); /* light gray */
+	--accent-foreground: oklch(0.19 0.01 266); /* dark gray */
+	--destructive: oklch(0.62 0.22 29); /* red-orange */
+	--destructive-foreground: oklch(0.98 0 0); /* almost white */
+	--border: oklch(0.9 0.007 266); /* light gray */
+	--input: oklch(0.9 0.007 266); /* light gray */
+	--ring: oklch(0.56 0.21 11); /* red */
+	--radius: 0.5rem;
+	--chart-1: oklch(0.66 0.23 59); /* orange */
+	--chart-2: oklch(0.5 0.13 193); /* teal */
+	--chart-3: oklch(0.36 0.07 222); /* dark blue */
+	--chart-4: oklch(0.8 0.2 95); /* yellow */
+	--chart-5: oklch(0.83 0.23 82); /* warm yellow */
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+	--background: oklch(0.13 0.03 71); /* very dark brown */
+	--foreground: oklch(0.95 0 0); /* off-white */
+	--card: oklch(0.2 0.02 75); /* dark brown */
+	--card-foreground: oklch(0.95 0 0); /* off-white */
+	--popover: oklch(0.18 0 0); /* very dark gray */
+	--popover-foreground: oklch(0.95 0 0); /* off-white */
+	--primary: oklch(0.56 0.21 11); /* red */
+	--primary-foreground: oklch(0.97 0.01 7); /* very light pink */
+	--secondary: oklch(0.25 0.005 266); /* dark gray */
+	--secondary-foreground: oklch(0.98 0 0); /* almost white */
+	--muted: oklch(0.22 0 0); /* very dark gray */
+	--muted-foreground: oklch(0.65 0.007 266); /* grayish blue */
+	--accent: oklch(0.22 0.02 59); /* muted brown */
+	--accent-foreground: oklch(0.98 0 0); /* almost white */
+	--destructive: oklch(0.37 0.18 29); /* dark red */
+	--destructive-foreground: oklch(0.97 0.02 7); /* light pink */
+	--border: oklch(0.25 0.005 266); /* dark gray */
+	--input: oklch(0.25 0.005 266); /* dark gray */
+	--ring: oklch(0.56 0.21 11); /* red */
+	--chart-1: oklch(0.5 0.18 252); /* vibrant blue */
+	--chart-2: oklch(0.46 0.14 193); /* teal green */
+	--chart-3: oklch(0.67 0.18 72); /* warm orange */
+	--chart-4: oklch(0.72 0.16 327); /* purple */
+	--chart-5: oklch(0.6 0.2 11); /* reddish pink */
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+		font-size: 0.875rem;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.no-scrollbar::-webkit-scrollbar {
+	display: none;
+}
+
+.no-scrollbar {
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+}
+
+/* Calendar background */
+.rdrCalendarWrapper {
+  background-color: transparent !important;
+  /* color: #E5E5E5 !important; */
+  border-radius: 10px;
+}
+
+/* Header month and year picker */
+/* .rdrMonthAndYearPickers select {
+  color: #FFFFFF !important;
+  background-color: #2A2A3A !important;
+} */
+
+.rdrNextPrevButton {
+	background-color: transparent !important;
+	color: #fff;
+	border: 1px solid rgb(52, 73, 94) !important;
+}
+
+/* Weekday labels (Mon, Tue, etc.) */
+/* .rdrWeekDays {
+  color: #CBD5E1 !important;
+} */
+
+/* Normal days */
+.rdrDay,
+.rdrDayNumber span {
+  color: #fff !important;
+}
+
+/* Hover effect on days */
+/* .rdrDayHovered {
+  background-color: #4F46E5 !important;
+  color: white !important;
+  border-radius: 6px;
+} */
+
+/* Selected day background */
+/* .rdrDaySelected span {
+  background-color: #6366F1 !important;
+  color: white !important;
+  border-radius: 6px;
+} */
+
+/* Today’s date border */
+/* .rdrDayToday .rdrDayNumber span {
+  border: 1px solid #FACC15 !important;
+  color: #FACC15 !important;
+} */
+
+/* Disabled dates */
+.rdrDayDisabled,
+.rdrDayPassive .rdrDayNumber span,
+.rdrDayDisabled .rdrDayNumber span {
+	background-color: transparent !important;
+  color: #6B7280 !important;
+  opacity: 0.9 !important;
 }
