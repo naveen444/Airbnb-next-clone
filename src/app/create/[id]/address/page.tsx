@@ -5,7 +5,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 import dynamic from "next/dynamic";
 import { memo, useMemo, useState } from "react";
 import { Skeleton } from '@/components/ui/skeleton';
-import { CreateBottomBar } from "@/app/components/createBottomBar";
+import { CreateBottomBar } from "@/app/components/CreateBottomBar";
 import { createLocation } from "@/app/actions";
 import { useParams } from "next/navigation";
 

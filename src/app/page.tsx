@@ -12,6 +12,10 @@ async function getData({
 }: {
 	searchParams?: Promise<{
 		filter?: string;
+		country?: string;
+		guest?: string;
+		room?: string;
+		bathroom?: string;
 	}>,
 	userId: string | undefined
 }) {
@@ -22,6 +26,10 @@ async function getData({
 			addedDescription: true,
 			addedLocation: true,
 			categoryName: search?.filter ?? undefined,
+			country: search?.country ?? undefined,
+			guests: search?.guest ?? undefined,
+			bedrooms: search?.room ?? undefined,
+			bathrooms: search?.bathroom ?? undefined,
 		},
 		select: {
 			photo: true,
@@ -45,6 +53,10 @@ export default async function Home({
 }: {
 	searchParams?: Promise<{
 		filter?: string;
+		country?: string;
+		guest?: string;
+		room?: string;
+		bathroom?: string;
 	}>
 }) {
 	const search = await searchParams;
@@ -59,17 +71,20 @@ export default async function Home({
   );
 }
 
-
 async function ShowItems({
 	searchParams
 }: {
 	searchParams?: Promise<{
 		filter?: string;
+		country?: string;
+		guest?: string;
+		room?: string;
+		bathroom?: string;
 	}>
 }) {
 	const { getUser } = getKindeServerSession();
 	const user = await getUser();
-	const data = await getData({searchParams: searchParams, userId: user.id});
+	const data = await getData({searchParams: searchParams, userId: user?.id});
 
 	return (
 		<>
@@ -88,7 +103,7 @@ async function ShowItems({
 									imagePath={item.photo as string} 
 									location={item.country as string}
 									price={item.price as number}
-									userId={user.id}
+									userId={user?.id}
 									favouriteId={item.Favourite[0]?.id}
 									isInFavourites={item.Favourite.length > 0 ? true : false}
 									homeId={item.id}

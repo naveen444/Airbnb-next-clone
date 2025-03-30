@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardHeader } from "@/components/ui/card";
 import { Counter } from "@/app/components/Counter";
-import { CreateBottomBar } from "@/app/components/createBottomBar";
+import { CreateBottomBar } from "@/app/components/CreateBottomBar";
 import { createDescription } from "@/app/actions";
 
 export default async function DescriptionPage({params}: {params: Promise<{id: string}>}) {
