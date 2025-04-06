@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import prisma from "./lib/db";
 import { supabase } from "./lib/supabase";
 import { revalidatePath } from "next/cache";
+import { ReservationStatus } from "@prisma/client";
 
 export async function createAirbnbHome({userId} : {userId: string}) {
 	const data = await prisma.home.findFirst({
@@ -156,4 +157,181 @@ export async function createReservation(formData: FormData) {
 	});
 
 	return redirect("/");
+}
+
+export async function userSetHomeInactive(formData: FormData) {
+	const homeId = formData.get("homeId") as string;
+	const userId = formData.get("userId") as string;
+	const pathName = formData.get("pathname") as string;
+
+	const data = await prisma.home.update({
+		where: { id: homeId, userId: userId },
+		data: { isActive: false }
+	});
+
+	revalidatePath(pathName);
+}
+
+export async function userSetHomeActive(formData: FormData) {
+	const homeId = formData.get("homeId") as string;
+	const userId = formData.get("userId") as string;
+	const pathName = formData.get("pathname") as string;
+
+	const data = await prisma.home.update({
+		where: { id: homeId, userId: userId },
+		data: { isActive: true }
+	});
+
+	revalidatePath(pathName);
+}
+
+export async function getActiveHomeData(userId: string) {
+	const data = await prisma.home.findMany({
+		where: {
+			userId: userId,
+			addedCategory: true,
+			addedDescription: true,
+			addedLocation: true,
+			isActive: true,
+		},
+		select: {
+			id: true,
+			country: true,
+			photo: true,
+			description: true,
+			price: true,
+			Favourite: {
+				where: {
+					userId: userId
+				}
+			}
+		},
+		orderBy: {
+			createdAt: "desc"
+		}
+	});
+
+	const today = new Date();
+
+	// Check for future reservations for each home
+	const homesWithReservations = await Promise.all(data.map(async (home) => {
+		const hasFutureReservations = await prisma.reservation.findFirst({
+				where: {
+					homeId: home.id,
+					startDate: { gt: today }, // Future reservations only
+				},
+		});
+
+		return {
+			...home,
+			hasFutureReservations: !!hasFutureReservations, // Convert to boolean
+		};
+	}));
+
+	return homesWithReservations;
+}
+
+export async function getInactiveHomeData(userId: string) {
+	const data = await prisma.home.findMany({
+		where: {
+			userId: userId,
+			addedCategory: true,
+			addedDescription: true,
+			addedLocation: true,
+			isActive: false,
+		},
+		select: {
+			id: true,
+			country: true,
+			photo: true,
+			description: true,
+			price: true,
+			Favourite: {
+				where: {
+					userId: userId
+				}
+			}
+		},
+		orderBy: {
+			createdAt: "desc"
+		}
+	});
+
+	return data;
+}
+
+export async function getReservationsData(userId: string, statusType: string) {
+	const data = await prisma.reservation.findMany({
+		where: {
+			userId: userId,
+			status: statusType as ReservationStatus
+		},
+		distinct: ['homeId'],
+		select: {
+			id: true,
+			Home: {
+				select: {
+					photo: true,
+					id: true,
+					price: true,
+					country: true,
+					description: true,
+					Favourite: {
+						where: {
+							userId: userId
+						}
+					}
+				}
+			}
+		}
+	});
+
+	return data;
+}
+
+export async function getReservationHomeData(userId: string, homeId: string) {
+	const data = await prisma.home.findUnique({
+		where: {
+			id: homeId
+		},
+		select: {
+			photo: true,
+			guests: true,
+			bathrooms: true,
+			bedrooms: true,
+			title: true,
+			description: true,
+			categoryName: true,
+			price: true,
+			country: true,
+			createdAt: true,
+			isActive: true,
+			reservation: {
+				where: {
+					homeId: homeId,
+					userId: userId
+				},
+			},
+			User: {
+				select: {
+					firstName: true,
+					profileImage: true,
+				}
+			}
+		}
+	});
+
+	return data
+}
+
+export async function cancelReservation(formData: FormData) {
+	const reservationId = formData.get("reservationId") as string;
+	const pathName = formData.get("pathname") as string;
+
+	const data = await prisma.reservation.update({
+		where: {id: reservationId},
+		data: {status: "canceled" as ReservationStatus}
+	})
+
+	revalidatePath(pathName);
 }

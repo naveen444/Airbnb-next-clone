@@ -11,13 +11,16 @@ interface iAppProps {
 	price: number;
 	userId: string | undefined;
 	isInFavourites: boolean;
-	favouriteId: string | undefined;
+	favouriteId: string;
 	homeId: string;
 	pathname: string;
-	cardLink: string;
+	ownerListing: boolean | undefined;
+	active: boolean;
+	fetchHomes: () => void;
+	hasFutureReservations: boolean;
 }
 
-export function ListingCard({
+export function MyHomesListingCard({
 	description, 
 	imagePath, 
 	location, 
@@ -27,10 +30,23 @@ export function ListingCard({
 	isInFavourites,
 	homeId,
 	pathname,
-	cardLink,
+	ownerListing,
+	active,
+	fetchHomes,
+	hasFutureReservations,
 } : iAppProps) {
 	const {getCountyByValue} = useCountries();
 	const country = getCountyByValue(location);
+
+	async function setFormActiveThenReload(formData: FormData) {
+		await userSetHomeActive(formData);
+		fetchHomes();
+	}
+
+	async function setFormInactiveThenReload(formData: FormData) {
+		await userSetHomeInactive(formData);
+		fetchHomes();
+	}
 
 	return (
 		<div className="flex flex-col">
@@ -60,10 +76,32 @@ export function ListingCard({
 								</form>
 							)}
 						</div>
+						{ownerListing ?  
+							active ?
+								<div className="z-10 absolute top-12 right-2">
+									<form action={setFormInactiveThenReload}>
+										<input type="hidden" name="userId" value={userId} />
+										<input type="hidden" name="homeId" value={homeId} />
+										<input type="hidden" name="pathname" value={pathname} />
+										<UnlistButton isDisabled={hasFutureReservations ? true : false} />
+									</form>
+								</div>
+								:
+								<div className="z-10 absolute top-12 right-2">
+									<form action={setFormActiveThenReload}>
+										<input type="hidden" name="userId" value={userId} />
+										<input type="hidden" name="homeId" value={homeId} />
+										<input type="hidden" name="pathname" value={pathname} />
+										<AddToListButton />
+									</form>
+								</div>
+							: 
+							<></>
+						}
 					</>
 				)}
 			</div>
-			<Link href={cardLink} className="mt-1" >
+			<Link href={`/home/${homeId}`} className="mt-1" >
 				<h3 className="font-medium text-base">{country?.flag} {country?.label} / {country?.region}</h3>
 				<p className="text-muted-foreground line-clamp-2">{description}</p>
 				<p className="pt-2 text-muted-foreground"><span className="font-medium text-white">&#8377; {price}</span> / Night</p>

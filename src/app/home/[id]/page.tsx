@@ -27,6 +27,7 @@ async function getData(homeId: string) {
 			price: true,
 			country: true,
 			createdAt: true,
+			isActive: true,
 			reservation: {
 				where: {
 					homeId: homeId
@@ -113,7 +114,7 @@ export default async function HomePage({
 					/>
 
 					{user?.id ? (
-						<ReservationsSubmitButton />
+						<ReservationsSubmitButton isDisabled={data?.isActive ? false : true} />
 					) : (
 						<Button className="w-full cursor-pointer" asChild>
 							<Link href="/api/auth/login">Make a Reservation</Link>

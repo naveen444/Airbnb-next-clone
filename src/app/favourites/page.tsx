@@ -59,6 +59,7 @@ export default async function FavouritePage() {
 									userId={user.id}
 									favouriteId={item.Home?.Favourite[0].id as string}
 									isInFavourites={item.Home?.Favourite.length as number > 0 ? true : false}
+									cardLink={`/home/${item.Home?.id}`}
 								/>
 							))
 						}

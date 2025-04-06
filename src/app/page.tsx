@@ -30,6 +30,7 @@ async function getData({
 			guests: search?.guest ?? undefined,
 			bedrooms: search?.room ?? undefined,
 			bathrooms: search?.bathroom ?? undefined,
+			isActive: true
 		},
 		select: {
 			photo: true,
@@ -108,6 +109,7 @@ async function ShowItems({
 									isInFavourites={item.Favourite.length > 0 ? true : false}
 									homeId={item.id}
 									pathname="/"
+									cardLink={`/home/${item.id}`}
 								/>
 							))
 						}

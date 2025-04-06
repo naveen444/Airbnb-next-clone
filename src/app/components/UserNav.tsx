@@ -37,28 +37,40 @@ export async function UserNav() {
 								</button>
 							</form>
 						</DropdownMenuItem>
-						<DropdownMenuItem className="cursor-pointer">
-							<Link href="/my-homes" className="w-full">My Listings</Link>
-						</DropdownMenuItem>
-						<DropdownMenuItem className="cursor-pointer">
-							<Link href="/favourites" className="w-full">My Favourites</Link>
-						</DropdownMenuItem>
-						<DropdownMenuItem className="cursor-pointer">
-							<Link href="/reservations" className="w-full">My Reservations</Link>
-						</DropdownMenuItem>
+						<Link href="/my-homes" className="w-full">
+							<DropdownMenuItem className="cursor-pointer">
+								My Listings
+							</DropdownMenuItem>
+						</Link>
+						<Link href="/favourites" className="w-full">
+							<DropdownMenuItem className="cursor-pointer">
+								My Favourites
+							</DropdownMenuItem>
+						</Link>
+						<Link href="/reservations" className="w-full">
+							<DropdownMenuItem className="cursor-pointer">
+								My Reservations
+							</DropdownMenuItem>
+						</Link>
 						<DropdownMenuSeparator />
-						<DropdownMenuItem className="cursor-pointer">
-							<LogoutLink className="w-full">Logout</LogoutLink>
-						</DropdownMenuItem>
+						<LogoutLink className="w-full">
+							<DropdownMenuItem className="cursor-pointer">
+								Logout
+							</DropdownMenuItem>
+						</LogoutLink>
 					</>
 				) : (
 					<>
-						<DropdownMenuItem className="cursor-pointer">
-							<RegisterLink className="w-full">Register</RegisterLink>
-						</DropdownMenuItem>
-						<DropdownMenuItem className="cursor-pointer">
-							<LoginLink className="w-full">Login</LoginLink>
-						</DropdownMenuItem>
+						<RegisterLink className="w-full">
+							<DropdownMenuItem className="cursor-pointer">
+								Register
+							</DropdownMenuItem>
+						</RegisterLink>
+						<LoginLink className="w-full">
+							<DropdownMenuItem className="cursor-pointer">
+								Login
+							</DropdownMenuItem>
+						</LoginLink>
 					</>
 				)}
 			</DropdownMenuContent>

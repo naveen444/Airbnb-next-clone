@@ -39,6 +39,7 @@ model Home {
   photo        String?
   price        Int?
   categoryName String?
+  isActive     Boolean @default(true)
 
   Favourite   Favourite[]
   reservation Reservation[]
@@ -63,12 +64,19 @@ model Favourite {
   createdAt DateTime @default(now())
 }
 
+enum ReservationStatus {
+  confirmed
+  canceled
+  expired
+}
+
 model Reservation {
   id String @id @default(uuid())
 
   startDate DateTime
   endDate   DateTime
-  createdAt DateTime @default(now())
+  createdAt DateTime          @default(now())
+  status    ReservationStatus @default(confirmed)
 
   User   User?   @relation(fields: [userId], references: [id])
   userId String?
