@@ -4,8 +4,8 @@
 /* @custom-variant dark (&:is(.dark *)); */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  /* --color-background: var(--background); */
+  /* --color-foreground: var(--foreground); */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -45,8 +45,8 @@
 
 :root {
   --radius: 0.625rem;
-	--background: oklch(1 0 0); /* white */
-	--foreground: oklch(0.14 0.01 266); /* dark gray */
+	/* --background: oklch(1 0 0); white */
+	/* --foreground: oklch(0.14 0.01 266); dark gray */
 	--card: oklch(1 0 0); /* white */
 	--card-foreground: oklch(0.14 0.01 266); /* dark gray */
 	--popover: oklch(1 0 0); /* white */
@@ -81,8 +81,8 @@
 }
 
 .dark {
-	--background: oklch(0.13 0.03 71); /* very dark brown */
-	--foreground: oklch(0.95 0 0); /* off-white */
+	/* --background: oklch(0.13 0.03 71); very dark brown */
+	/* --foreground: oklch(0.95 0 0); off-white */
 	--card: oklch(0.2 0.02 75); /* dark brown */
 	--card-foreground: oklch(0.95 0 0); /* off-white */
 	--popover: oklch(0.18 0 0); /* very dark gray */
@@ -115,7 +115,7 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
-@layer base {
+/* @layer base {
   * {
     @apply border-border outline-ring/50;
 		font-size: 0.875rem;
@@ -123,7 +123,7 @@
   body {
     @apply bg-background text-foreground;
   }
-}
+} */
 
 .no-scrollbar::-webkit-scrollbar {
 	display: none;

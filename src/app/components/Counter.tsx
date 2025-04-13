@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Minus, Plus } from "lucide-react";
 import { useState } from "react";
 
-export function Counter({name}: {name: string}) {
-	const [amount, setAmount] = useState(0);
+export function Counter({name, defaultAmount}: {name: string, defaultAmount: number}) {
+	const [amount, setAmount] = useState(defaultAmount);
 
 	function increase() {
 		setAmount(amount + 1);

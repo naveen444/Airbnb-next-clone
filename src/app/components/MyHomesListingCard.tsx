@@ -101,7 +101,7 @@ export function MyHomesListingCard({
 					</>
 				)}
 			</div>
-			<Link href={`/home/${homeId}`} className="mt-1" >
+			<Link href={`/my-homes/home/${homeId}`} className="mt-1" >
 				<h3 className="font-medium text-base">{country?.flag} {country?.label} / {country?.region}</h3>
 				<p className="text-muted-foreground line-clamp-2">{description}</p>
 				<p className="pt-2 text-muted-foreground"><span className="font-medium text-white">&#8377; {price}</span> / Night</p>

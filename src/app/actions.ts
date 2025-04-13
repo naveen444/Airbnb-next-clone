@@ -57,6 +57,22 @@ export async function createCategoryPage(formData: FormData) {
 	return redirect(`/create/${homeId}/description`);
 }
 
+export async function editCategoryPage(formData: FormData) {
+	const categoryName = formData.get('categoryName') as string;
+	const homeId = formData.get('homeId') as string
+	const data = await prisma.home.update({
+		where: {
+			id: homeId
+		},
+		data: {
+			categoryName: categoryName,
+			addedCategory: true,
+		}
+	});
+
+	return redirect(`/edit/${homeId}/description`);
+}
+
 export async function createDescription(formData: FormData) {
 	const title = formData.get("title") as string;
 	const description = formData.get("description") as string;
@@ -94,6 +110,41 @@ export async function createDescription(formData: FormData) {
 	return redirect(`/create/${homeId}/address`);
 }
 
+export async function editDescription(formData: FormData) {
+	const description = formData.get("description") as string;
+	const price = formData.get("price");
+	const imageFile = formData.get("image") as File;
+	const homeId = formData.get("homeId") as string;
+
+	const guest = formData.get("guest") as string;
+	const room = formData.get("room") as string;
+	const bathroom = formData.get("bathroom") as string;
+
+	const { data: imageData } = await supabase.storage
+		.from("images")
+		.upload(`${imageFile.name}-${new Date()}`, imageFile, {
+			cacheControl: '2592000',
+			contentType: 'image/png'
+		});
+	
+	const data = await prisma.home.update({
+		where: {
+			id: homeId,
+		},
+		data: {
+			description: description,
+			price: Number(price),
+			bedrooms: room,
+			bathrooms: bathroom,
+			guests: guest,
+			photo: imageData?.path,
+			addedDescription: true,
+		}
+	});
+
+	return redirect(`/my-homes/home/${homeId}?updated=true`);
+}
+
 export async function createLocation(formData: FormData) {
 
 	const homeId = formData.get("homeId") as string;
@@ -108,7 +159,7 @@ export async function createLocation(formData: FormData) {
 		}
 	})
 
-	return redirect("/");
+	return redirect(`/my-homes/home/${homeId}?created=true`);
 }
 
 export async function addtoFavourite(formData: FormData) {
@@ -156,7 +207,7 @@ export async function createReservation(formData: FormData) {
 		}
 	});
 
-	return redirect("/");
+	return redirect(`/reservations/home/${homeId}?confirmed=true`);
 }
 
 export async function userSetHomeInactive(formData: FormData) {
@@ -334,4 +385,46 @@ export async function cancelReservation(formData: FormData) {
 	})
 
 	revalidatePath(pathName);
+}
+
+export async function getMyHomeData(homeId: string) {
+	const data = await prisma.home.findUnique({
+			where: {
+				id: homeId
+			},
+			select: {
+				photo: true,
+				guests: true,
+				bathrooms: true,
+				bedrooms: true,
+				title: true,
+				description: true,
+				categoryName: true,
+				price: true,
+				country: true,
+				createdAt: true,
+				isActive: true,
+				reservation: {
+					where: {
+						homeId: homeId
+					},
+					select: {
+						startDate: true,
+						endDate: true,
+						status: true,
+						createdAt: true,
+						id: true,
+						User: true,
+					}
+				},
+				User: {
+					select: {
+						firstName: true,
+						profileImage: true,
+					}
+				}
+			}
+		});
+	
+		return data
 }

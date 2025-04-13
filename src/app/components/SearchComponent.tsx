@@ -101,21 +101,21 @@ export function SearchComponent() {
 											<h3 className="underline font-medium">Guests</h3>
 											<p className="text-muted-foreground text-sm">How many guests do you want?</p>
 										</div>
-										<Counter name="guest" />
+										<Counter name="guest" defaultAmount={0} />
 									</div>
 									<div className="w-full flex items-center justify-between">
 										<div className="flex flex-col">
 											<h3 className="underline font-medium">Rooms</h3>
 											<p className="text-muted-foreground text-sm">How many rooms do you have?</p>
 										</div>
-										<Counter name="room" />
+										<Counter name="room" defaultAmount={0} />
 									</div>
 									<div className="w-full flex items-center justify-between">
 										<div className="flex flex-col">
 											<h3 className="underline font-medium">Bathrooms</h3>
 											<p className="text-muted-foreground text-sm">How many bathrooms do you have?</p>
 										</div>
-										<Counter name="bathroom" />
+										<Counter name="bathroom" defaultAmount={0} />
 									</div>
 								</CardHeader>
 							</Card>

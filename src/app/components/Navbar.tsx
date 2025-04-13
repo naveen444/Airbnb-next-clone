@@ -4,8 +4,11 @@ import desktopLogo from "../../../public/airbnb-desktop.png";
 import mobileLogo from "../../../public/airbnb-mobile.webp";
 import { UserNav } from "./UserNav";
 import { SearchComponent } from "./SearchComponent";
+import ModeToggler from "./ModeToggler";
 
 export function Navbar() {
+	
+
 	return (
 		<nav className="w-full border-b">
 			<div className="flex items-center justify-between container mx-auto px-5 lg:px-10 py-3">
@@ -17,7 +20,10 @@ export function Navbar() {
 
 				<SearchComponent />
 
-				<UserNav />
+				<div>
+					<ModeToggler />
+					<UserNav />
+				</div>
 			</div>
 		</nav>
 	)
