@@ -9,7 +9,7 @@ export default function SelectCategory({category}: {category: string}) {
 	const [selectedCategory, setSelectedCategory] = useState<string | undefined>(category);
 
 	return (
-		<div className="grid grid-cols-5 gap-8 mt-10 w-3/5 mx-auto">
+		<div className="container grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-8 mt-4 sm:mt-5 mx-auto">
 			<input type="hidden" name="categoryName" value={selectedCategory as string} />
 			{
 				categoryItems.map((item, i) => (

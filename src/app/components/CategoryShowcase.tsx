@@ -11,7 +11,7 @@ export default function CategoryShowcase({categoryName} : {categoryName: string}
 				alt="category image" 
 				width={44} 
 				height={44} 
-				className="invert-100"
+				className="invert-theme"
 			/>
 
 			<div className="flex flex-col ml-4">

@@ -11,7 +11,7 @@ export default async function MyHomes() {
 	}
 
 	return (
-		<div className="container mx-auto px-5 lg:px-10 mt-10 mb-10">
+		<div className="container mx-auto mt-10 mb-10">
 			<h2 className="text-3xl font-semibold tracking-tight">Your Homes</h2>
 
 			<MyHomesContent userId={user.id} />

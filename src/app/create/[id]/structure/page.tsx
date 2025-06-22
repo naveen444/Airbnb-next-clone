@@ -7,10 +7,10 @@ export default async function StructureRoute({params}: {params: Promise<{id: str
 
 	return (
 		<>
-			<div className="w-3/5 mx-auto">
-				<h2 className="text-3xl font-semibold tracking-tight transition-colors">Which of these best describe your home?</h2>
+			<div className="container mx-auto mt-5 mb-5">
+				<h2 className="w-full text-xl text-left sm:text-3xl font-semibold tracking-tight transition-colors">Which of these best describe your home?</h2>
 			</div>
-			<form action={createCategoryPage}>
+			<form action={createCategoryPage} className="mb-36">
 				<input type="hidden" name="homeId" value={id} />
 				<SelectCategory category="" />
 				<CreateBottomBar />

@@ -50,15 +50,19 @@ export function SearchComponent() {
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
-				<div className="rounded-full py-2 px-5 border flex items-center cursor-pointer">
-					<div className='flex h-full divide-x font-medium'>
-						<p className='px-4'>Anywhere</p>
-						<p className='px-4'>Any Week</p>
-						<p className='px-4'>Add Guests</p>
+				<div className="rounded-full py-1 px-2 sm:py-2 sm:px-5 border flex items-center cursor-pointer">
+					<div className='h-full divide-x font-medium hidden sm:flex'>
+						<p className='px-2 sm:px-4'>Anywhere</p>
+						<p className='px-2 sm:px-4'>Any Week</p>
+						<p className='px-2 sm:px-4'>Add Guests</p>
+					</div>
+
+					<div className='block sm:hidden'>
+						<p className='px-2 sm:px-4'>Search</p>
 					</div>
 
 					<SearchIcon 
-						className="bg-primary text-white p-1 h-8 w-8 rounded-full"
+						className="bg-primary text-white p-1 h-6 w-6 sm:h-8 sm:w-8 rounded-full"
 					/>
 				</div>
 			</DialogTrigger>

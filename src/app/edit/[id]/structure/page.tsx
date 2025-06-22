@@ -8,10 +8,10 @@ export default async function EditStructureRoute({params}: {params: Promise<{id:
 
 	return (
 		<>
-			<div className="w-3/5 mx-auto">
-				<h2 className="text-3xl font-semibold tracking-tight transition-colors">Which of these best describe your home?</h2>
+			<div className="container mx-auto mt-5 mb-5">
+				<h2 className="text-xl sm:text-3xl font-semibold tracking-tight transition-colors">Which of these best describe your home?</h2>
 			</div>
-			<form action={editCategoryPage}>
+			<form action={editCategoryPage} className="mb-36">
 				<input type="hidden" name="homeId" value={id} />
 				<SelectCategory category={data?.categoryName as string} />
 				<CreateBottomBar />

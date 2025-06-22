@@ -11,7 +11,7 @@ export function Navbar() {
 
 	return (
 		<nav className="w-full border-b">
-			<div className="flex items-center justify-between container mx-auto px-5 lg:px-10 py-3">
+			<div className="flex items-center justify-between container mx-auto py-3">
 				
 				<Link href="/">
 					<Image src={desktopLogo} alt="Desktop Logo" className="w-20 hidden lg:block" />
@@ -20,7 +20,7 @@ export function Navbar() {
 
 				<SearchComponent />
 
-				<div>
+				<div className="rounded-full border py-1 px-1.5 sm:p-2 lg:ps-3 lg:pe-2 lg:py-2 flex items-center gap-x-2">
 					<ModeToggler />
 					<UserNav />
 				</div>

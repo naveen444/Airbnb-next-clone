@@ -16,7 +16,7 @@ export default async function MySingleHomePage({
 	const user = await getUser();
 
 	return (
-		<div className="w-[75%] mx-auto mt-5 mb-10">
+		<div className="container mx-auto mt-5 mb-10">
 			<MyHomeClient id={id} data={data} country={country} user={user} />
 		</div>
 	)

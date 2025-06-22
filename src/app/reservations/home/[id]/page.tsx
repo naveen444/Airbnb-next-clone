@@ -17,7 +17,7 @@ export default async function ReservationHomePage({
 	const country = getCountyByValue(data?.country as string);
 
 	return (
-		<div className="w-[75%] mx-auto mt-5 mb-10">
+		<div className="container mx-auto mt-5 mb-10">
 			<h1 className="font-medium text-2xl mb-5">{data?.title}</h1>
 			
 			<MyReservationClient id={id} data={data} country={country} user={user} />

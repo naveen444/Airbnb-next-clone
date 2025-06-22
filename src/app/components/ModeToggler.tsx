@@ -20,8 +20,9 @@ export default function ModeToggler() {
       variant="ghost"
       size="icon"
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+			className="h-max w-max cursor-pointer"
     >
-      {resolvedTheme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+      {resolvedTheme === "dark" ? <Sun className="" /> : <Moon className="" />}
     </Button>
   );
 }

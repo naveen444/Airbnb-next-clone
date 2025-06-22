@@ -35,7 +35,7 @@ export default function CategoryFilterItems() {
 							)}
 						>
 							<div className="relative w-6 h-6">
-								<Image src={item.imageUrl} alt="category image" className="w-6 h-6 invert-100" width={24} height={24} />
+								<Image src={item.imageUrl} alt="category image" className="w-6 h-6 invert-theme" width={24} height={24} />
 							</div>
 							<p className="text-xs font-medium">{item.title}</p>
 						</Link>

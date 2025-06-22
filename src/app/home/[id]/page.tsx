@@ -58,9 +58,9 @@ export default async function HomePage({
 	const user = await getUser();
 
 	return (
-		<div className="w-[75%] mx-auto mt-5 mb-10">
+		<div className="container mx-auto mt-5 mb-10">
 			<h1 className="font-medium text-2xl mb-5">{data?.title}</h1>
-			<div className="relative h-[480px] mb-6">
+			<div className="relative w-full h-[360px] sm:h-[450px] mb-6">
 				<Image 
 					src={`https://vtilkrpezfgpguifkvrk.supabase.co/storage/v1/object/public/images/${data?.photo}`} 
 					alt="Image of Home"
@@ -70,8 +70,8 @@ export default async function HomePage({
 			</div>
 				
 				
-			<div className="flex justify-between items-start gap-x-24 mt-8">
-				<div className="w-2/3">
+			<div className="w-full flex flex-wrap sm:flex-nowrap justify-between items-start gap-x-12 mt-8">
+				<div className="w-full sm:w-[80%]">
 					<h3 className="">{country?.flag} {country?.label} / {country?.region}</h3>
 
 					<div className="w-full flex items-center justify-start gap-x-2 text-muted-foreground">
@@ -92,21 +92,21 @@ export default async function HomePage({
 						</div>
 					</div>
 
-					<Separator className="bg-white opacity-30 my-6" />
+					<Separator className="bg-foreground text-background opacity-30 my-6" />
 
 					<CategoryShowcase categoryName={data?.categoryName as string} />
 
-					<Separator className="bg-white opacity-30 my-6" />
+					<Separator className="bg-foreground text-background opacity-30 my-6" />
 
 					<p className="text-muted-foreground leading-[1.5] tracking-wide">{data?.description}</p>
 
-					<Separator className="bg-white opacity-30 my-6" />
+					<Separator className="bg-foreground text-background opacity-30 my-6" />
 
 					<HomeMap locationValue={country?.value as string} />
 
 				</div>
 
-				<form action={createReservation}>
+				<form className="min-w-full w-full sm:min-w-[300px] sm:w-auto" action={createReservation}>
 					<input type='hidden' name='userId' value={user?.id} />
 					<input type='hidden' name='homeId' value={id} />
 					<SelectCalendar 

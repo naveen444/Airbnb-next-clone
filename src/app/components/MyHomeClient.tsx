@@ -41,7 +41,7 @@ export default function MyHomeClient({ id, data, country, user }: any) {
 					<Button className="cursor-pointer">Edit Home</Button>
 				</Link>
 			</div>
-			<div className="relative h-[480px] mb-6">
+			<div className="relative h-[360px] sm:h-[450px] mb-6">
 				<Image 
 					src={`https://vtilkrpezfgpguifkvrk.supabase.co/storage/v1/object/public/images/${data?.photo}`} 
 					alt="Image of Home"
@@ -51,15 +51,15 @@ export default function MyHomeClient({ id, data, country, user }: any) {
 			</div>
 				
 				
-			<div className="flex justify-between items-start gap-x-10 mt-8">
-				<div className="w-3/5">
+			<div className="flex flex-wrap md:flex-nowrap justify-between items-start gap-x-10 gap-y-4 md:gap-y-0 mt-4 md:mt-8">
+				<div className="w-full lg:w-3/5">
 					<h3 className="">{country?.flag} {country?.label} / {country?.region}</h3>
 
 					<div className="w-full flex items-center justify-start gap-x-2 text-muted-foreground">
 						<p>{data?.guests} Guests</p> * <p>{data?.bedrooms} Bedrooms</p> * <p>{data?.bathrooms} Bathrooms</p>
 					</div>
 
-					<div className="flex items-center mt-6">
+					<div className="flex items-center mt-3 md:mt-6">
 						<img 
 							className="w-11 h-11 rounded-full"
 							src={
@@ -73,21 +73,21 @@ export default function MyHomeClient({ id, data, country, user }: any) {
 						</div>
 					</div>
 
-					<Separator className="bg-white opacity-30 my-6" />
+					<Separator className="bg-foreground text-background opacity-30 my-3 sm:my-6" />
 
 					<CategoryShowcase categoryName={data?.categoryName as string} />
 
-					<Separator className="bg-white opacity-30 my-6" />
+					<Separator className="bg-foreground text-background opacity-30 my-3 sm:my-6" />
 
 					<p className="text-muted-foreground leading-[1.5] tracking-wide">{data?.description}</p>
 
-					<Separator className="bg-white opacity-30 my-6" />
+					<Separator className="bg-foreground text-background opacity-30 my-3 sm:my-6" />
 
 					<HomeMap locationValue={country?.value as string} />
 
 				</div>
 
-				<div className="w-2/5 flex flex-col items-start justify-start gap-4">
+				<div className="w-full lg:w-2/5 flex flex-col items-start justify-start gap-4">
 					<h2 className="text-lg font-semibold">Reservations</h2>
 					{
 						data?.reservation.map((res: any) => (

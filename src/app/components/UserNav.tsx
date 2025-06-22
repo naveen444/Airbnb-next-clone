@@ -14,7 +14,7 @@ export async function UserNav() {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger className="cursor-pointer">
-				<div className="rounded-full border p-2 lg:ps-3 lg:pe-2 lg:py-2 flex items-center gap-x-2">
+				<div className="flex items-center gap-x-1.5">
 					<MenuIcon className="w-5 h-5 lg:w-5 lg:h-5" />
 
 					<img 
@@ -22,7 +22,7 @@ export async function UserNav() {
 							user?.picture ?? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnFRPx77U9mERU_T1zyHcz9BOxbDQrL4Dvtg&s"
 						}
 						alt="User Image" 
-						className="rounded-full h-6 w-6 hidden lg:block"
+						className="rounded-full h-6 w-6"
 					/>
 				</div>
 			</DropdownMenuTrigger>
