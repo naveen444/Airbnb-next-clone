@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Airbnb Clone App",
-  description: "Airbnb Clone App",
+  description: "A full-stack Airbnb clone app built with Next.js and Tailwind CSS. List, book, and manage properties with modern UI, authentication, and dynamic features.",
 };
 
 export default function RootLayout({

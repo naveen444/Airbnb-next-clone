@@ -38,43 +38,45 @@ export default function AddressPage() {
 
 	return (
 		<>
-			<div className="w-3/5 mx-auto">
+			<div className="container mx-auto mt-4 sm:mt-5 mb-5">
 				<h2 className="text-3xl font-semibold tracking-tight transition-colors mb-10">Where is your home located?</h2>
 			</div>
 
 			<form action={createLocation}>
 				<input type="hidden" name="homeId" value={id} />
 				<input type="hidden" name="countryValue" value={locationValue} />
-				<div className="w-3/5 mx-auto">
-					<div className="mb-5">
-						<Select required onValueChange={(value) => setLocationValue(value)}>
-							<SelectTrigger className="w-full cursor-pointer">
-								<SelectValue placeholder="Select a Country" />
-							</SelectTrigger>
-							<SelectContent>
-								<SelectGroup>
-									<SelectLabel>Countries</SelectLabel>
-									{
-										countries.map((item) => (
-											<CountryItem key={item.value} item={item} />
-										))
-									}
-								</SelectGroup>
-							</SelectContent>
-						</Select>
-						{/* <select required className="w-full bg-black border no-scrollbar py-2 px-2 rounded ">
-							<option value="" disabled selected>Select a Country</option>
-							{
-								countries.map((item) => (
-									<option className="py-1 border-none" key={item.value} value={item.value}>
-										{item.flag} {item.label} / {item.region}
-									</option>
-								))
-							}
-						</select> */}
-					</div>
+				<div className="container mx-auto mt-4 sm:mt-5 mb-5">
+					<div className="max-w-[800px] mx-auto">
+						<div className="mb-5">
+							<Select required onValueChange={(value) => setLocationValue(value)}>
+								<SelectTrigger className="w-full cursor-pointer">
+									<SelectValue placeholder="Select a Country" />
+								</SelectTrigger>
+								<SelectContent>
+									<SelectGroup>
+										<SelectLabel>Countries</SelectLabel>
+										{
+											countries.map((item) => (
+												<CountryItem key={item.value} item={item} />
+											))
+										}
+									</SelectGroup>
+								</SelectContent>
+							</Select>
+							{/* <select required className="w-full bg-black border no-scrollbar py-2 px-2 rounded ">
+								<option value="" disabled selected>Select a Country</option>
+								{
+									countries.map((item) => (
+										<option className="py-1 border-none" key={item.value} value={item.value}>
+											{item.flag} {item.label} / {item.region}
+										</option>
+									))
+								}
+							</select> */}
+						</div>
 
-					<LazyMap locationValue={locationValue} />
+						<LazyMap locationValue={locationValue} />
+					</div>
 				</div>
 
 				<CreateBottomBar />
