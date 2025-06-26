@@ -67,7 +67,7 @@ export default async function Home({
   return (
     <div className="container mx-auto px-5 lg:px-10 pb-12">
 
-			<Suspense>
+			<Suspense fallback={null}>
       	<CategoryFilterItems />
 			</Suspense>
 
