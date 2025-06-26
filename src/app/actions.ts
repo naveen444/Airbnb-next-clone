@@ -6,6 +6,20 @@ import { supabase } from "./lib/supabase";
 import { revalidatePath } from "next/cache";
 import { ReservationStatus } from "@prisma/client";
 
+type HomeType = {
+	id: string;
+	description: string | null;
+	country: string | null;
+	photo: string | null;
+	price: number | null;
+	Favourite: {
+			userId: string | null;
+			id: string;
+			createdAt: Date;
+			homeId: string | null;
+	}[];
+}
+
 export async function createAirbnbHome({userId} : {userId: string}) {
 	const data = await prisma.home.findFirst({
 		where: {
@@ -266,7 +280,7 @@ export async function getActiveHomeData(userId: string) {
 	const today = new Date();
 
 	// Check for future reservations for each home
-	const homesWithReservations = await Promise.all(data.map(async (home) => {
+	const homesWithReservations = await Promise.all(data.map(async (home: HomeType) => {
 		const hasFutureReservations = await prisma.reservation.findFirst({
 				where: {
 					homeId: home.id,
@@ -312,7 +326,7 @@ export async function getInactiveHomeData(userId: string) {
 	const today = new Date();
 
 	// Check for future reservations for each home
-	const homesWithReservations = await Promise.all(data.map(async (home) => {
+	const homesWithReservations = await Promise.all(data.map(async (home: HomeType) => {
 		const hasFutureReservations = await prisma.reservation.findFirst({
 				where: {
 					homeId: home.id,
