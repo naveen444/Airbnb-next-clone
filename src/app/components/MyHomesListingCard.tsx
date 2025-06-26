@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useCountries } from "../lib/getCountries";
+import { getCountryByValue } from "../lib/getCountries";
 import { AddToFavouriteButton, AddToListButton, RemoveFromFavouriteButton, UnlistButton } from "./SubmitButtons";
 import { addtoFavourite, removeFromFavourite, userSetHomeActive, userSetHomeInactive } from "../actions";
 
@@ -35,8 +35,7 @@ export function MyHomesListingCard({
 	fetchHomes,
 	hasFutureReservations,
 } : iAppProps) {
-	const {getCountyByValue} = useCountries();
-	const country = getCountyByValue(location);
+	const country = getCountryByValue(location);
 
 	async function setFormActiveThenReload(formData: FormData) {
 		await userSetHomeActive(formData);

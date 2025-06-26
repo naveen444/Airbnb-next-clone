@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { SearchIcon } from 'lucide-react';
 import { memo, useMemo, useState, useEffect } from 'react';
-import { useCountries } from '../lib/getCountries';
+import { getCountryByValue, getAllCountries } from '../lib/getCountries';
 import HomeMap from './HomeMap';
 import { Button } from '@/components/ui/button';
 import { SubmitButtons } from './SubmitButtons';
@@ -29,7 +29,6 @@ const CountryItem = memo(function CountryItem({ item }: {item: Country}) {
 export function SearchComponent() {
 	const [step, setStep] = useState(1);
 	const [locationValue, setLocationValue] = useState('');
-	const { getAllCountries, getCountyByValue } = useCountries();
 	const searchParams = useSearchParams();
 	const countryParam = searchParams.get('country');
 	const [filters, setFilters] = useState<{
@@ -40,7 +39,7 @@ export function SearchComponent() {
   }>({});
 
 	useEffect(() => {
-		const country = countryParam ? getCountyByValue(countryParam) : null;
+		const country = countryParam ? getCountryByValue(countryParam) : null;
 		setFilters({
       country: country?.label ?? undefined,
       guest: searchParams.get('guest') ?? undefined,

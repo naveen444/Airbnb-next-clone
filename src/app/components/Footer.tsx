@@ -8,7 +8,7 @@ export function Footer() {
 	const [today, setToday] = useState<number>();
 	
 	useEffect(() => {
-		let date = new Date();
+		const date = new Date();
 		setToday(date.getFullYear());
 	}, [])
 

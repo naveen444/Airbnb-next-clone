@@ -1,5 +1,5 @@
 import prisma from "@/app/lib/db"
-import { useCountries } from "@/app/lib/getCountries";
+import { getCountryByValue } from "@/app/lib/getCountries";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import CategoryShowcase from "@/app/components/CategoryShowcase";
@@ -50,10 +50,9 @@ export default async function HomePage({
 }: { 
 	params: Promise<{ id : string }>
 }) {
-	const { getCountyByValue } = useCountries();
 	const { id } = await params;
 	const data = await getData(id);
-	const country = getCountyByValue(data?.country as string);
+	const country = getCountryByValue(data?.country as string);
 	const { getUser } = getKindeServerSession();
 	const user = await getUser();
 

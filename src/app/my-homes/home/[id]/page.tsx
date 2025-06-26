@@ -1,5 +1,4 @@
-import { useCountries } from "@/app/lib/getCountries";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { getCountryByValue } from "@/app/lib/getCountries";
 import { getMyHomeData } from "@/app/actions";
 import MyHomeClient from "@/app/components/MyHomeClient";
 
@@ -8,12 +7,9 @@ export default async function MySingleHomePage({
 }: { 
 	params: Promise<{ id : string }>,
 }) {
-	const { getCountyByValue } = useCountries();
 	const { id } = await params;
 	const data = await getMyHomeData(id);
-	const country = getCountyByValue(data?.country as string);
-	const { getUser } = getKindeServerSession();
-	const user = await getUser();
+	const country = getCountryByValue(data?.country as string);
 
 	if (!country) {
 		return <div className="container mx-auto mt-5 mb-10">

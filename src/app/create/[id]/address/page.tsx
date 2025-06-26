@@ -1,6 +1,6 @@
 "use client";
 
-import { useCountries } from "@/app/lib/getCountries";
+import { getAllCountries } from "@/app/lib/getCountries";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import dynamic from "next/dynamic";
 import { memo, useMemo, useState } from "react";
@@ -25,7 +25,6 @@ const CountryItem = memo(function CountryItem({ item }: {item: Country}) {
 
 export default function AddressPage() {
 	const { id } = useParams();
-	const { getAllCountries } = useCountries();
 	const [locationValue, setLocationValue] = useState("");
 
 	// Memoize countries to prevent re-rendering

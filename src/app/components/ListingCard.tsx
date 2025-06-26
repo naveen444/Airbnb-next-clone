@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useCountries } from "../lib/getCountries";
+import { getCountryByValue } from "../lib/getCountries";
 import { AddToFavouriteButton, RemoveFromFavouriteButton } from "./SubmitButtons";
 import { addtoFavourite, removeFromFavourite } from "../actions";
 
@@ -29,8 +29,7 @@ export function ListingCard({
 	pathname,
 	cardLink,
 } : iAppProps) {
-	const {getCountyByValue} = useCountries();
-	const country = getCountyByValue(location);
+	const country = getCountryByValue(location);
 
 	return (
 		<div className="flex flex-col">
