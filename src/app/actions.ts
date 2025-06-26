@@ -5,6 +5,7 @@ import prisma from "./lib/db";
 import { supabase } from "./lib/supabase";
 import { revalidatePath } from "next/cache";
 import { ReservationStatus } from "@prisma/client";
+import { unstable_noStore as noStore } from "next/cache";
 
 type HomeType = {
 	id: string;
@@ -251,6 +252,7 @@ export async function userSetHomeActive(formData: FormData) {
 }
 
 export async function getActiveHomeData(userId: string) {
+	noStore();
 	const data = await prisma.home.findMany({
 		where: {
 			userId: userId,
@@ -298,6 +300,7 @@ export async function getActiveHomeData(userId: string) {
 }
 
 export async function getInactiveHomeData(userId: string) {
+	noStore();
 	const data = await prisma.home.findMany({
 		where: {
 			userId: userId,
@@ -344,6 +347,7 @@ export async function getInactiveHomeData(userId: string) {
 }
 
 export async function getReservationsData(userId: string, statusType: string) {
+	noStore();
 	const data = await prisma.reservation.findMany({
 		where: {
 			userId: userId,
@@ -373,6 +377,7 @@ export async function getReservationsData(userId: string, statusType: string) {
 }
 
 export async function getReservationHomeData(userId: string, homeId: string) {
+	noStore();
 	const data = await prisma.home.findUnique({
 		where: {
 			id: homeId
@@ -420,6 +425,7 @@ export async function cancelReservation(formData: FormData) {
 }
 
 export async function getMyHomeData(homeId: string) {
+	noStore();
 	const data = await prisma.home.findUnique({
 			where: {
 				id: homeId
