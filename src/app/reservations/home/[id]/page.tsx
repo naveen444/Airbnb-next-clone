@@ -2,6 +2,7 @@ import { getCountryByValue } from "@/app/lib/getCountries";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { getReservationHomeData } from "@/app/actions";
 import MyReservationClient from "@/app/components/MyReservationClient";
+import { Suspense } from "react";
 
 export default async function ReservationHomePage({
 	params
@@ -24,7 +25,9 @@ export default async function ReservationHomePage({
 		<div className="container mx-auto mt-5 mb-10 pb-10">
 			<h1 className="font-medium text-2xl mb-5">{data?.title}</h1>
 			
-			<MyReservationClient id={id} data={data} country={country} user={user} />
+			<Suspense fallback={null}>
+				<MyReservationClient id={id} data={data} country={country} user={user} />
+			</Suspense>
 		</div>
 	)
 }

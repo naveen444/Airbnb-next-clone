@@ -66,7 +66,10 @@ export default async function Home({
 	const search = await searchParams;
   return (
     <div className="container mx-auto px-5 lg:px-10 pb-12">
-      <CategoryFilterItems />
+
+			<Suspense>
+      	<CategoryFilterItems />
+			</Suspense>
 
 			<Suspense key={search?.filter} fallback={<SkeletonLoading />}>
 				<ShowItems searchParams={searchParams} />

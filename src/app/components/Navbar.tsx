@@ -5,6 +5,7 @@ import mobileLogo from "../../../public/airbnb-mobile.webp";
 import { UserNav } from "./UserNav";
 import { SearchComponent } from "./SearchComponent";
 import ModeToggler from "./ModeToggler";
+import { Suspense } from "react";
 
 export function Navbar() {
 	
@@ -18,7 +19,9 @@ export function Navbar() {
 					<Image src={mobileLogo} alt="Mobile Logo" className="w-8 block lg:hidden" />
 				</Link>
 
-				<SearchComponent />
+				<Suspense fallback={null}>
+					<SearchComponent />
+				</Suspense>
 
 				<div className="rounded-full border py-1 px-1.5 sm:p-2 lg:ps-3 lg:pe-2 lg:py-2 flex items-center gap-x-2">
 					<ModeToggler />

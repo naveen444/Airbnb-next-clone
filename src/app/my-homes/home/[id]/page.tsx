@@ -1,6 +1,7 @@
 import { getCountryByValue } from "@/app/lib/getCountries";
 import { getMyHomeData } from "@/app/actions";
 import MyHomeClient from "@/app/components/MyHomeClient";
+import { Suspense } from "react";
 
 export default async function MySingleHomePage({
 	params
@@ -19,7 +20,9 @@ export default async function MySingleHomePage({
 
 	return (
 		<div className="container mx-auto mt-5 mb-10 pb-10">
-			<MyHomeClient id={id} data={data} country={country} />
+			<Suspense fallback={null}>
+				<MyHomeClient id={id} data={data} country={country} />
+			</Suspense>
 		</div>
 	)
 }
