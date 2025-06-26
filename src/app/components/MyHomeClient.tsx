@@ -11,7 +11,47 @@ import { useEffect } from "react"
 import { toast } from "sonner"
 import { useSearchParams } from "next/navigation"
 
-export default function MyHomeClient({ id, data, country, user }: any) {
+type ReservationWithUser = {
+  id: string;
+  startDate: Date;
+  endDate: Date;
+  createdAt: Date;
+  status: "confirmed" | "canceled" | "expired";
+  User?: {
+    profileImage?: string | null;
+    firstName?: string | null;
+    lastName?: string | null;
+  } | null;
+};
+
+type HomeData = {
+  id?: string  | null;
+  photo: string | null;
+  guests: string | null;
+  bathrooms: string | null;
+  bedrooms: string | null;
+  title: string | null;
+  description: string | null;
+  categoryName: string | null;
+  price: number | null;
+  country: string | null;
+  createdAt: Date | null;
+  reservation?: ReservationWithUser[];
+  User?: {
+    firstName: string | null;
+    profileImage: string | null;
+  } | null;
+} | null;
+
+type Country = {
+  label: string;
+  latLang: [number, number];
+  region: string;
+  value: string;
+  flag: string;
+};
+
+export default function MyHomeClient({ id, data, country }: {id: string, data: HomeData, country: Country }) {
 	const searchParams = useSearchParams();
 
 	useEffect(() => {
@@ -89,8 +129,8 @@ export default function MyHomeClient({ id, data, country, user }: any) {
 
 				<div className="w-full lg:w-2/5 flex flex-col items-start justify-start gap-4">
 					<h2 className="text-lg font-semibold">Reservations</h2>
-					{
-						data?.reservation.map((res: any) => (
+					{ (data?.reservation ?? []).length > 0 ?
+						data?.reservation?.map((res: ReservationWithUser) => (
 							<div className="w-full flex flex-col items-start justify-start gap-4 mb-2 p-4 border rounded-md" key={res.id}>
 								<div className="w-full flex items-center justify-between">
 									<div className="flex items-center">
@@ -123,6 +163,10 @@ export default function MyHomeClient({ id, data, country, user }: any) {
 								</div>
 							</div>
 						))
+						: 
+						<div className="w-full flex items-center">
+							<p className="">No reservations yet.</p>
+						</div> 
 					}
 				</div>
 			</div>

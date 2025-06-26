@@ -8,16 +8,22 @@ export default async function MySingleHomePage({
 }: { 
 	params: Promise<{ id : string }>,
 }) {
+	const { getCountyByValue } = useCountries();
 	const { id } = await params;
 	const data = await getMyHomeData(id);
-	const { getCountyByValue } = useCountries();
 	const country = getCountyByValue(data?.country as string);
 	const { getUser } = getKindeServerSession();
 	const user = await getUser();
 
+	if (!country) {
+		return <div className="container mx-auto mt-5 mb-10">
+			<div className="text-center py-20">Country not found</div>
+		</div>
+	}
+
 	return (
-		<div className="container mx-auto mt-5 mb-10">
-			<MyHomeClient id={id} data={data} country={country} user={user} />
+		<div className="container mx-auto mt-5 mb-10 pb-10">
+			<MyHomeClient id={id} data={data} country={country} />
 		</div>
 	)
 }

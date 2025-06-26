@@ -7,9 +7,25 @@ import HomeList from "./HomeList";
 import { getActiveHomeData, getInactiveHomeData } from "../actions";
 import SkeletonCard from "./SkeletonCard";
 
+type Home = {
+	hasFutureReservations: boolean;
+	id: string;
+	description: string | null;
+	country: string | null;
+	photo: string | null;
+	price: number | null;
+	Favourite: {
+			userId: string | null;
+			id: string;
+			createdAt: Date;
+			homeId: string | null;
+	}[];
+	
+};
+
 export default function MyHomesContent({ userId }: { userId: string }) {
-	const [activeHomes, setActiveHomes] = useState<any[]>([]);
-	const [inactiveHomes, setInactiveHomes] = useState<any[]>([]);
+	const [activeHomes, setActiveHomes] = useState<Home[]>([]);
+	const [inactiveHomes, setInactiveHomes] = useState<Home[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [isPending, startTransition] = useTransition();
 
@@ -17,7 +33,11 @@ export default function MyHomesContent({ userId }: { userId: string }) {
 		setLoading(true);
 		startTransition(async () => {
 			const data = value === "active" ? await getActiveHomeData(userId) : await getInactiveHomeData(userId);
-			value === "active" ? setActiveHomes(data) : setInactiveHomes(data);
+			if (value === "active") {
+				setActiveHomes(data);
+			} else {
+				setInactiveHomes(data);
+			}
 			setLoading(false);
 		});
 	};

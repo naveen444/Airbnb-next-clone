@@ -3,7 +3,10 @@ import { Skeleton } from "@/components/ui/skeleton";
 export default function HomePageLoading() {
 	return (
 		<div className="container mx-auto mt-5 mb-10">
-			<Skeleton className="h-4 w-1/3"/>
+			<div className="w-full flex items-center justify-between">
+				<Skeleton className="h-4 w-1/3"/>
+				<Skeleton className="h-8 w-24"/>
+			</div>
 			<Skeleton className="w-full h-[480px] mt-5" />
 
 			<div className="w-full flex flex-wrap sm:flex-nowrap justify-between items-start gap-x-12 mt-8">

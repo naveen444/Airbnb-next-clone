@@ -21,8 +21,8 @@ export default async function EditDescriptionPage({params}: {params: Promise<{id
 
 			<form action={editDescription}>
 				<input type="hidden" name="homeId" value={id} />
-				<div className="container mx-auto mt-4 sm:mt-5 flex flex-col gap-y-5 mb-36">
-					<div className="w-full flex flex-wrap lg:flex-nowrap items-stretch justify-center gap-6 lg:gap-10">
+				<div className="container mx-auto mt-4 sm:mt-5 flex flex-col gap-y-5">
+					<div className="w-full flex flex-wrap lg:flex-nowrap items-stretch justify-center gap-6 lg:gap-10 mb-30">
 
 						<div className="w-full h-full relative">
 							<div className="relative h-[360px] sm:h-[540px] mb-6">

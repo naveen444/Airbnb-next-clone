@@ -41,7 +41,7 @@ export default function CategoryFilterItems() {
 			>
 				<CarouselContent>
 					{
-						categoryItems.map((item, i) => 
+						categoryItems.map((item) => 
 							(
 								<CarouselItem key={item.id} className={`basis-1/4 sm:basis-1/6 md:basis-1/8 lg:basis-1/12`} >
 									<Link 

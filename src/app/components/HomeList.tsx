@@ -1,8 +1,22 @@
 import { MyHomesListingCard } from "./MyHomesListingCard";
 import NoCardItems from "./NoCardItems";
 
+type Home = {
+	id: string;
+	description: string | null;
+	country: string | null;
+	photo: string | null;
+	price: number | null;
+	Favourite: {
+			userId: string | null;
+			id: string;
+			createdAt: Date;
+			homeId: string | null;
+	}[];
+	hasFutureReservations: boolean;
+};
 
-export default function HomeList({ items, userId, active, fetchHomes }: { items: any[], userId: string, active: boolean, fetchHomes: () => void }) {
+export default function HomeList({ items, userId, active, fetchHomes }: { items: Home[], userId: string, active: boolean, fetchHomes: () => void }) {
 	return (
 		<div className="grid lg:grid-cols-4 sm:grid-cols-2 md:grid-cols-3 grid-cols-1 gap-8 mt-4">
 			{items.length === 0 ? 

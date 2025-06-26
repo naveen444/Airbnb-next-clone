@@ -17,11 +17,11 @@ type Country = {
   region: string;
 };
 
-const CountryItem = memo(({ item }: {item: Country}) => (
-  <SelectItem key={item.value} value={item.value}>
+const CountryItem = memo(function CountryItem({ item }: {item: Country}) {
+  return <SelectItem key={item.value} value={item.value}>
     {item.flag} {item.label} / {item.region}
   </SelectItem>
-));
+});
 
 export default function AddressPage() {
 	const { id } = useParams();
@@ -45,7 +45,7 @@ export default function AddressPage() {
 			<form action={createLocation}>
 				<input type="hidden" name="homeId" value={id} />
 				<input type="hidden" name="countryValue" value={locationValue} />
-				<div className="container mx-auto mt-4 sm:mt-5 mb-5">
+				<div className="container mx-auto mt-4 sm:mt-5 mb-5 pb-30">
 					<div className="max-w-[800px] mx-auto">
 						<div className="mb-5">
 							<Select required onValueChange={(value) => setLocationValue(value)}>

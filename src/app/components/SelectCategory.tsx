@@ -12,7 +12,7 @@ export default function SelectCategory({category}: {category: string}) {
 		<div className="container grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-8 mt-4 sm:mt-5 mx-auto">
 			<input type="hidden" name="categoryName" value={selectedCategory as string} />
 			{
-				categoryItems.map((item, i) => (
+				categoryItems.map((item) => (
 					<div key={item.id} className="cursor-pointer">
 						<Card className={`${category === item.name ? "border-green-400" : ""} ${selectedCategory === item.name ? "border-primary" : ""}`} onClick={() => setSelectedCategory(item.name)}>
 							<CardHeader>

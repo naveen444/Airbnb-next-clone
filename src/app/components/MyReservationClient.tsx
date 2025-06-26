@@ -13,12 +13,50 @@ import { useEffect } from "react"
 import { useSearchParams } from "next/navigation"
 import { toast } from "sonner"
 
+type Reservation = {
+  id: string;
+  startDate: string | Date;
+  endDate: string | Date;
+  status: "confirmed" | "canceled" | "expired";
+};
+
+type User = {
+  profileImage: string | null;
+  firstName: string | null;
+} | null;
+
+type HomeData = {
+  photo: string | null;
+  description: string | null;
+  createdAt: Date | null;
+  bedrooms: string | null;
+  bathrooms: string | null;
+  guests: string | null;
+  categoryName: string | null;
+  reservation: Reservation[];
+  User: User;
+} | null;
+
+type Country = {
+  flag: string;
+  label: string;
+  region: string;
+  value: string;
+};
+
+type Props = {
+  id: string;
+  data: HomeData;
+  country: Country;
+  user: { id: string };
+};
+
 export default function MyReservationClient({
 	id,
 	data,
 	country,
 	user
-} : any) {
+} : Props) {
 	const searchParams = useSearchParams();
 	
 	useEffect(() => {
@@ -82,10 +120,10 @@ export default function MyReservationClient({
 
 				
 				<div className="w-full lg:w-2/5 flex flex-col items-start justify-start gap-4">
-					{(data?.reservation ?? []).filter((item: any) => item.status === "confirmed").length > 0 ? 
+					{(data?.reservation ?? []).filter((item) => item.status === "confirmed").length > 0 ? 
 						<div className="w-full flex flex-col items-start justify-start gap-4">
 							<h2 className="text-lg font-semibold">Confirmed Reservations</h2>
-							{data?.reservation?.filter((item: any) => item.status === "confirmed").map((res: any) => (
+							{data?.reservation?.filter((item) => item.status === "confirmed").map((res) => (
 								<form className="w-full p-4 border rounded-md" key={res.id} action={cancelReservation}>
 									<input type='hidden' name='reservationId' value={res.id} />
 									<input type='hidden' name='pathname' value={`/reservations/home/${id}`} />
@@ -113,10 +151,10 @@ export default function MyReservationClient({
 						""
 					}
 					
-					{(data?.reservation ?? []).filter((item: any) => item.status === "canceled").length > 0 ? 
+					{(data?.reservation ?? []).filter((item) => item.status === "canceled").length > 0 ? 
 						<div className="w-full flex flex-col items-start justify-start gap-4">
 							<h2 className="text-lg font-semibold">Canceled Reservations</h2>
-							{data?.reservation?.filter((item: any) => item.status === "canceled").map((res: any) => (
+							{data?.reservation?.filter((item) => item.status === "canceled").map((res) => (
 								<div className="w-full flex justify-between items-center mb-2 p-4 border rounded-md" key={res.id}>
 									<p className="w-full">
 										{new Date(res.startDate).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric", })} (IST)
@@ -132,10 +170,10 @@ export default function MyReservationClient({
 						""
 					}
 
-					{(data?.reservation ?? []).filter((item: any) => item.status === "expired").length > 0 ? 
+					{(data?.reservation ?? []).filter((item) => item.status === "expired").length > 0 ? 
 						<div className="w-full flex flex-col items-start justify-start gap-4">
 							<h2 className="text-lg font-semibold">Expired Reservations</h2>
-							{data?.reservation?.filter((item: any) => item.status === "expired").map((res: any) => (
+							{data?.reservation?.filter((item) => item.status === "expired").map((res) => (
 								<div className="w-full flex justify-between items-center mb-2 p-4 border rounded-md" key={res.id}>
 									<p className="w-full">
 										{new Date(res.startDate).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric", })} (IST)

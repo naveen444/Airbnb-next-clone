@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCountries } from "../lib/getCountries";
-import { AddToFavouriteButton, AddToListButton, RemoveFromFavouriteButton, UnlistButton } from "./SubmitButtons";
-import { addtoFavourite, removeFromFavourite, userSetHomeActive, userSetHomeInactive } from "../actions";
+import { AddToFavouriteButton, RemoveFromFavouriteButton } from "./SubmitButtons";
+import { addtoFavourite, removeFromFavourite } from "../actions";
 
 interface iAppProps {
 	imagePath: string;

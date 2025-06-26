@@ -1,7 +1,7 @@
 import countries from 'world-countries';
 
 const countriesFormatted = countries
-	.map((item, i) => ({
+	.map((item) => ({
 		value: item.cca2,
 		label: item.name.common,
 		flag: item.flag,

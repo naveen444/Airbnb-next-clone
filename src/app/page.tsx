@@ -5,6 +5,7 @@ import prisma from "./lib/db";
 import SkeletonCard from "./components/SkeletonCard";
 import NoCardItems from "./components/NoCardItems";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { Footer } from "./components/Footer";
 
 async function getData({
 	searchParams,
@@ -62,12 +63,14 @@ export default async function Home({
 }) {
 	const search = await searchParams;
   return (
-    <div className="container mx-auto px-5 lg:px-10 pb-10">
+    <div className="container mx-auto px-5 lg:px-10 pb-12">
       <CategoryFilterItems />
 
 			<Suspense key={search?.filter} fallback={<SkeletonLoading />}>
 				<ShowItems searchParams={searchParams} />
 			</Suspense>
+
+			<Footer />
     </div>
   );
 }

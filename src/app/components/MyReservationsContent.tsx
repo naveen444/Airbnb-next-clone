@@ -7,8 +7,25 @@ import { getReservationsData } from "../actions";
 import SkeletonCard from "./SkeletonCard";
 import ReservationsList from "./ReservationsList";
 
+type ReservationType = {
+    id: string;
+    Home: {
+        country: string | null;
+        id: string;
+        description: string | null;
+        photo: string | null;
+        price: number | null;
+        Favourite: {
+            id: string;
+            userId: string | null;
+            createdAt: Date;
+            homeId: string | null;
+        }[];
+    } | null;
+};
+
 export default function MyReservationsContent({ userId }: { userId: string }) {
-	const [reservationsData, setReservationsData] = useState<any[]>([]);
+	const [reservationsData, setReservationsData] = useState<ReservationType[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [isPending, startTransition] = useTransition();
 

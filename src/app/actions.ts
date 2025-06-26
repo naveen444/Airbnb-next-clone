@@ -44,7 +44,7 @@ export async function createAirbnbHome({userId} : {userId: string}) {
 export async function createCategoryPage(formData: FormData) {
 	const categoryName = formData.get('categoryName') as string;
 	const homeId = formData.get('homeId') as string
-	const data = await prisma.home.update({
+	await prisma.home.update({
 		where: {
 			id: homeId
 		},
@@ -60,7 +60,7 @@ export async function createCategoryPage(formData: FormData) {
 export async function editCategoryPage(formData: FormData) {
 	const categoryName = formData.get('categoryName') as string;
 	const homeId = formData.get('homeId') as string
-	const data = await prisma.home.update({
+	await prisma.home.update({
 		where: {
 			id: homeId
 		},
@@ -91,7 +91,7 @@ export async function createDescription(formData: FormData) {
 			contentType: 'image/png'
 		});
 	
-	const data = await prisma.home.update({
+	await prisma.home.update({
 		where: {
 			id: homeId,
 		},
@@ -127,7 +127,7 @@ export async function editDescription(formData: FormData) {
 			contentType: 'image/png'
 		});
 	
-	const data = await prisma.home.update({
+	await prisma.home.update({
 		where: {
 			id: homeId,
 		},
@@ -149,7 +149,7 @@ export async function createLocation(formData: FormData) {
 
 	const homeId = formData.get("homeId") as string;
 	const countryValue = formData.get("countryValue") as string;
-	const data = await prisma.home.update({
+	await prisma.home.update({
 		where: {
 			id: homeId
 		},
@@ -167,7 +167,7 @@ export async function addtoFavourite(formData: FormData) {
 	const userId = formData.get("userId") as string;
 	const pathName = formData.get("pathname") as string;
 
-	const data = await prisma.favourite.create({
+	await prisma.favourite.create({
 		data: {
 			homeId: homeId,
 			userId: userId
@@ -182,7 +182,7 @@ export async function removeFromFavourite(formData: FormData) {
 	const userId = formData.get("userId") as string;
 	const pathName = formData.get("pathname") as string;
 
-	const data = await prisma.favourite.delete({
+	await prisma.favourite.delete({
 		where: {
 			id: favouriteId,
 			userId: userId,
@@ -198,7 +198,7 @@ export async function createReservation(formData: FormData) {
 	const startDate = formData.get("startDate") as string;
 	const endDate = formData.get("endDate") as string;
 
-	const data = await prisma.reservation.create({
+	await prisma.reservation.create({
 		data: {
 			userId: userId,
 			homeId: homeId,
@@ -215,7 +215,7 @@ export async function userSetHomeInactive(formData: FormData) {
 	const userId = formData.get("userId") as string;
 	const pathName = formData.get("pathname") as string;
 
-	const data = await prisma.home.update({
+	await prisma.home.update({
 		where: { id: homeId, userId: userId },
 		data: { isActive: false }
 	});
@@ -228,7 +228,7 @@ export async function userSetHomeActive(formData: FormData) {
 	const userId = formData.get("userId") as string;
 	const pathName = formData.get("pathname") as string;
 
-	const data = await prisma.home.update({
+	await prisma.home.update({
 		where: { id: homeId, userId: userId },
 		data: { isActive: true }
 	});
@@ -255,7 +255,8 @@ export async function getActiveHomeData(userId: string) {
 				where: {
 					userId: userId
 				}
-			}
+			},
+			
 		},
 		orderBy: {
 			createdAt: "desc"
@@ -308,7 +309,24 @@ export async function getInactiveHomeData(userId: string) {
 		}
 	});
 
-	return data;
+	const today = new Date();
+
+	// Check for future reservations for each home
+	const homesWithReservations = await Promise.all(data.map(async (home) => {
+		const hasFutureReservations = await prisma.reservation.findFirst({
+				where: {
+					homeId: home.id,
+					startDate: { gt: today }, // Future reservations only
+				},
+		});
+
+		return {
+			...home,
+			hasFutureReservations: !!hasFutureReservations, // Convert to boolean
+		};
+	}));
+
+	return homesWithReservations;
 }
 
 export async function getReservationsData(userId: string, statusType: string) {
@@ -379,7 +397,7 @@ export async function cancelReservation(formData: FormData) {
 	const reservationId = formData.get("reservationId") as string;
 	const pathName = formData.get("pathname") as string;
 
-	const data = await prisma.reservation.update({
+	await prisma.reservation.update({
 		where: {id: reservationId},
 		data: {status: "canceled" as ReservationStatus}
 	})

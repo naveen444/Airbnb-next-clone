@@ -1,8 +1,24 @@
 import { ListingCard } from "./ListingCard";
 import NoCardItems from "./NoCardItems";
 
+type ReservationType = {
+    id: string;
+    Home: {
+			country: string | null;
+			id: string;
+			description: string | null;
+			photo: string | null;
+			price: number | null;
+			Favourite: {
+					id: string;
+					userId: string | null;
+					createdAt: Date;
+					homeId: string | null;
+			}[];
+	} | null;
+};
 
-export default function ReservationsList({ items, userId }: { items: any[], userId: string }) {
+export default function ReservationsList({ items, userId }: { items: ReservationType[], userId: string }) {
 	return (
 		<div className="grid lg:grid-cols-4 sm:grid-cols-2 md:grid-cols-3 grid-cols-1 gap-8 mt-4">
 			{items.length === 0 ? 

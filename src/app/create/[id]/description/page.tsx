@@ -18,7 +18,7 @@ export default async function DescriptionPage({params}: {params: Promise<{id: st
 
 			<form action={createDescription}>
 				<input type="hidden" name="homeId" value={id} />
-				<div className="container mx-auto mt-4 sm:mt-5 w-full flex flex-wrap lg:flex-nowrap items-stretch justify-center gap-6 lg:gap-10">
+				<div className="container mx-auto mt-4 sm:mt-5 w-full flex flex-wrap lg:flex-nowrap items-stretch justify-center gap-6 lg:gap-10 pb-30">
 						<div className="w-full flex flex-col gap-y-5">
 							<div className="flex flex-col gap-y-2 ">
 								<Label className="">Title</Label>
